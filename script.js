@@ -2,4 +2,3 @@
 // span section to display error message
 // Don't submit the form to server.
 // form attribute 'novalidate'
-
