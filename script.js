@@ -3,6 +3,10 @@
 // Don't submit the form to server.
 // form attribute 'novalidate'
 
+import { populateCountries } from './countries.js';
+
+document.addEventListener('DOMContentLoaded', populateCountries);
+
 const form = document.querySelector('form');
 
 const email = document.querySelector('#email');
@@ -39,7 +43,5 @@ function checkEmail() {
 }
 
 function checkCountry(){
-    if (!country.validity.valid || ) {
-
-    }
+    if (!country.validity.valid)
 }
