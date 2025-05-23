@@ -7,6 +7,7 @@ const countries = [
     'Argentina',
     'Australia',
     'Austria',
+    'Bangladesh',
     'Belgium',
     'Brazil',
     'Bulgaria',
