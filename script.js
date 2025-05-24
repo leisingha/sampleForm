@@ -126,32 +126,54 @@ const passwordError = document.querySelector('.passwordContainer span');
 const rePassword = document.querySelector('#rePassword');
 const rePasswordError = document.querySelector('.rePasswordContainer span');
 
-email.addEventListener('input', handleError());
+email.addEventListener('input', () => {
+    checkEmail(email);
+});
+
+country.addEventListener('input', () => {
+    checkCountry(country);
+});
+
+postal.addEventListener('input', () => {
+    checkPostal(postal);
+});
 
 form.addEventListener('submit', (e) => {
     e.preventDefault();
 });
 
-function handleError() {}
-
-function checkEmail() {
-    if (!email.validity.valid) {
-        emailError.textContent = 'Incorrect email address';
-        emailError.classList = 'active';
+function checkEmail(mail) {
+    if (!mail.validity.valid) {
+        emailError.textContent = 'Please enter valid email address';
+        emailError.className = 'active';
     } else {
         emailError.textContent = '';
-        emailError.classList = '';
+        emailError.className = '';
     }
 }
 
-function checkCountry() {
-    if (!country.validity.valid) {
-        countryError.textContent = 'Invalid country';
-        country.classList = 'active';
+function checkCountry(cntry) {
+    if (!cntry.value) {
+        countryError.textContent = 'Select a valid Country';
+        countryError.className = 'active';
     } else {
-        emailError.textContent = '';
-        emailError.classList = '';
+        countryError.textContent = '';
+        countryError.className = '';
+        console.log('This works;');
     }
 }
 
-function checkPostal() {}
+function checkPostal(postal) {
+    const constraint = new RegExp(postalPatterns[country.value][0], '');
+
+    if (!postal.validity.valid) {
+        postalError.textContent = 'Please enter valid Postal Address';
+        postalError.className = 'active';
+    } else if (!constraint.test(postal.value)) {
+        postalError.textContent = `Invalid Postal Address. ${postalPatterns[country.value][1]}`;
+        postalError.className = 'active';
+    }
+
+    postalError.textContent = '';
+    postalError.className = '';
+}

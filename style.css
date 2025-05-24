@@ -86,9 +86,54 @@ button[type='submit']:active {
 }
 
 .active {
-    display: inline;
+    display: block;
 }
 
 span {
     display: none;
+}
+
+/* Style the select element to match inputs */
+select {
+    width: 100%;
+    height: 40px;
+    border-radius: 5px;
+    border: 2px solid var(--main-color);
+    background-color: var(--bg-color);
+    box-shadow: 4px 4px var(--main-color);
+    font-size: 15px;
+    font-weight: 600;
+    color: var(--font-color);
+    padding: 5px 10px;
+    outline: none;
+    margin-bottom: 10px;
+    cursor: pointer;
+    appearance: none; /* Removes default browser styling */
+    -webkit-appearance: none; /* For Safari */
+    -moz-appearance: none; /* For Firefox */
+}
+
+/* Add a custom dropdown arrow */
+.countryContainer {
+    position: relative;
+}
+
+.countryContainer::after {
+    content: '▼';
+    font-size: 15px;
+    color: var(--main-color);
+    position: absolute;
+    right: 15px;
+    top: 37px; /* Adjust based on your layout */
+    pointer-events: none; /* Ensures click goes through to select */
+}
+
+/* Style focus state to match inputs */
+select:focus {
+    border: 2px solid var(--input-focus);
+}
+
+/* Style the placeholder option */
+select option[value=''] {
+    color: var(--font-color-sub);
 }
