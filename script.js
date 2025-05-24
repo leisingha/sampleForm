@@ -159,21 +159,40 @@ function checkCountry(cntry) {
     } else {
         countryError.textContent = '';
         countryError.className = '';
-        console.log('This works;');
     }
 }
 
 function checkPostal(postal) {
-    const constraint = new RegExp(postalPatterns[country.value][0], '');
+    // First check if a country is selected
+    if (!country.value) {
+        postalError.textContent = 'Please select a country first';
+        postalError.className = 'active';
+        return false;
+    }
+
+    // Get the pattern for selected country
+    const pattern = postalPatterns[country.value];
+    if (!pattern) {
+        console.error('No postal pattern found for:', country.value);
+        return false;
+    }
+
+    const constraint = new RegExp(pattern[0]);
 
     if (!postal.validity.valid) {
         postalError.textContent = 'Please enter valid Postal Address';
         postalError.className = 'active';
-    } else if (!constraint.test(postal.value)) {
-        postalError.textContent = `Invalid Postal Address. ${postalPatterns[country.value][1]}`;
-        postalError.className = 'active';
+        return false;
     }
 
+    if (!constraint.test(postal.value)) {
+        postalError.textContent = `Invalid Postal Address. ${pattern[1]}`;
+        postalError.className = 'active';
+        return false;
+    }
+
+    // Only clear errors if all validations pass
     postalError.textContent = '';
     postalError.className = '';
+    return true;
 }
