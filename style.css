@@ -64,6 +64,7 @@ input:focus {
 input::placeholder {
     color: var(--font-color-sub);
     opacity: 0.8;
+    font-family: 'Times New Roman', Times, serif;
 }
 
 button[type='submit'] {
@@ -103,6 +104,7 @@ select {
     box-shadow: 4px 4px var(--main-color);
     font-size: 15px;
     font-weight: 600;
+    font-family: 'Times New Roman', Times, serif;
     color: var(--font-color);
     padding: 5px 10px;
     outline: none;

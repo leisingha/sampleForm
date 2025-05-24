@@ -126,6 +126,8 @@ const passwordError = document.querySelector('.passwordContainer span');
 const rePassword = document.querySelector('#rePassword');
 const rePasswordError = document.querySelector('.rePasswordContainer span');
 
+const formError = document.querySelector('h2 + span');
+
 email.addEventListener('input', () => {
     checkEmail(email);
 });
@@ -138,8 +140,17 @@ postal.addEventListener('input', () => {
     checkPostal(postal);
 });
 
+password.addEventListener('input', () => {
+    checkPassword(password);
+});
+
+rePassword.addEventListener('input', () => {
+    checkRePassword(rePassword);
+});
+
 form.addEventListener('submit', (e) => {
     e.preventDefault();
+    checkFormValidity();
 });
 
 function checkEmail(mail) {
@@ -195,4 +206,50 @@ function checkPostal(postal) {
     postalError.textContent = '';
     postalError.className = '';
     return true;
+}
+
+function checkPassword(pass) {
+    if (pass.validity.valueMissing) {
+        passwordError.textContent = 'Password field is required';
+        passwordError.className = 'active';
+    } else if (pass.validity.tooShort) {
+        passwordError.textContent =
+            'Password is too short. Minimum of 8 characters required';
+        passwordError.className = 'active';
+    } else if (pass.validity.patternMismatch) {
+        passwordError.textContent = pass.title;
+        passwordError.className = 'active';
+    } else if (!pass.validity.valid) {
+        passwordError.textContent = `Enter valid password`;
+        passwordError.className = 'active';
+    } else {
+        passwordError.textContent = '';
+        passwordError.className = '';
+        return true;
+    }
+}
+
+function checkRePassword(pass) {
+    if (password.validity.valueMissing) {
+        rePasswordError.textContent = 'Please complete main password first';
+        rePasswordError.className = 'active';
+    } else if (pass.validity.valueMissing) {
+        rePasswordError.textContent = 'Confirm Password field is required';
+        rePasswordError.className = 'active';
+    } else if (pass.value != password.value) {
+        rePasswordError.textContent = `Passwords do not match`;
+        rePasswordError.className = 'active';
+    } else {
+        rePasswordError.textContent = '';
+        rePasswordError.className = '';
+        return true;
+    }
+}
+
+function checkFormValidity() {
+    if (!form.checkValidity()) {
+        formError.textContent =
+            'Form contains errors. Please write valid inputs.';
+        formError.className = 'active';
+    }
 }
