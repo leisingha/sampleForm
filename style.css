@@ -31,7 +31,7 @@ form {
     padding: 2rem;
     border-radius: 5px;
     border: 2px solid var(--main-color);
-    box-shadow: 4px 4px var(--main-color);
+    box-shadow: 8px 8px var(--main-color);
     width: 400px;
 }
 
@@ -59,6 +59,7 @@ input {
 
 input:focus {
     border: 2px solid var(--input-focus);
+    box-shadow: 4px 4px var(--input-focus);
 }
 
 input::placeholder {
@@ -133,9 +134,24 @@ select {
 /* Style focus state to match inputs */
 select:focus {
     border: 2px solid var(--input-focus);
+    box-shadow: 4px 4px var(--input-focus);
 }
 
 /* Style the placeholder option */
 select option[value=''] {
     color: var(--font-color-sub);
+}
+
+span {
+    color: red;
+    margin-bottom: 0.25rem;
+}
+
+span::after {
+    content: '‼️';
+}
+
+input:invalid {
+    border: 2px solid red;
+    box-shadow: 4px 4px red;
 }
